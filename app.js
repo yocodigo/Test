@@ -1,112 +1,117 @@
-  $(document).ready(function(){
-    console.log("document loaded");
-});
+$(document).ready(function() {
+console.log("document loaded");
 
-$(".btn").on("click", function() {
-    //Prevents the document from reloading
-    event.preventDefault();
+    function modal() {
+        $('#myModal').modal('show');
+    }
 
-    //Global variables
-    var apiKey = "feec332cd3344e9226a7105dd29cc5dae84c154d";
-    var comicName = $("#comicSearch").val().trim();
-    var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&format=json";
-    var proxy = 'https://cors-anywhere.herokuapp.com/';
-    
+    $(".btn").on("click", function() {
+        //Prevents the document from reloading
+        event.preventDefault();
 
-    //AJAX API call to ComicVine    
-    $.ajax({
-      url: proxy + queryURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response.results);
-      // debugger;
-      console.log("The user input is: " + comicName);   
-        for (var i = 0; i < response.results.length; i++) {
-        //     debugger;
-            var aliasString = response.results[i].name;
-            var lcAliasString = aliasString.toLowerCase();
-            // console.log(lcAliasString);
-            var enter = '\n';
-
-            var arrayOfStrings = lcAliasString.split(enter);
+        //Global variables
+        var apiKey = "feec332cd3344e9226a7105dd29cc5dae84c154d";
+        var comicName = $("#comicSearch").val().trim();
+        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=10&format=json";
+        
+        // var queryURL = "https://comicvine.gamespot.com/api/series_list/?api_key=" + apiKey + "&format=json";
+        var proxy = 'https://cors-anywhere.herokuapp.com/';
             
-            var index = arrayOfStrings.indexOf(comicName);
-            console.log(arrayOfStrings);
-            console.log(index);
+        //Boolean variable for character matching
+        var charFound = false;
 
-        //  // console.log(response.results);
-        //  //    var resultName = response.results[i].aliases;
-        //  //    console.log(resultName);
-        //  //    var lcResultName = resultName.toLowerCase();
-        //  //    var lcComicName = comicName.toLowerCase();
+        //Boolean variable for publisher matching
+        var isMarvel = false;
 
+        //AJAX API call to ComicVine    
+        $.ajax({
+          url: proxy + queryURL,
+          method: 'GET'
+        }).done(function(response) {
+          console.log(response.results);
 
-        //  //    // var result = lcResultName.match(/lcComicName/);
-        //  //    var result= lcResultName.search(new RegExp(lcComicName, "i"));
-        //     // var result = resultName.match(/comicName/i);
-        //     // var result = resultName.toLowerCase().indexOf(comicName);
-        //     // if (result != -1 && (resultName.length === comicName.length)) {
-               if (index != -1) { 
-                console.log(response.results[i].name);
+            for (var i = 0; i < response.results.length; i++) {
+                // debugger;
+                var character = response.results[i];
+                
+                //Targets character key
+                var characterName = character.name; 
+                
+                //Targets publisher key
+                var characterPublisher = character.publisher;
+                
+                //Targets publisher name key
+                var publisherName = characterPublisher.name;   
+                
+                //Lower cases the returned string 
+                var lcCharacterName = characterName.toLowerCase();
+                
+                //Lower cases the user input string
+                var lcComicName = comicName.toLowerCase();
+
+                //Assigns the response id value to originId
+                var originId = response.results[i].id;
+
+                if (lcCharacterName === lcComicName) {     
+                    charFound = true;
+                    break;
+                }
             }
             
-        //     // if (result) {
-        //     //     console.log(response.results[i].name);
-        //     // }
-        }
+            if (charFound) {
+                 if (publisherName === "Marvel") {
+                    isMarvel = true;
+                }
+                 else {
+                   modal();
+                }
+            }
 
+            if (isMarvel) {
+                $(".name").text(characterName);
+                $(".realName").text(character.real_name);
+                $(".birth").text(character.birth);
+                $(".description").html(character.description);
+                $("img").attr("src", character.image.medium_url);
+            }
+        });
     });
 });
+//ALTERNATIVE MODAL CODE
+// Get the modal
+// var modal = document.getElementById('myModal');
 
-// var string = "Stackoverflow is the BEST";
-// var result = string.match(/best/i);
-// // result == 'BEST';
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
 
-// if (result){
-//     alert('Matched');
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// // When the user clicks the button, open the modal 
+// btn.onclick = function() {
+//     modal.style.display = "block";
 // }
 
-// var result= string.search(new RegExp(searchstring, "i"));
-
-// var string="Stackoverflow is the BEST"; 
-// var searchstring="best";
-
-// // lowercase both strings
-// var lcString=string.toLowerCase();
-// var lcSearchString=searchstring.toLowerCase();
-
-// var result = lcString.indexOf(lcSearchString)>=0;
-// alert(result);
-
-// $("#comicImage").attr("src", response.results[0].image.original_url);
-
-// var result = response.results[i].name.search(new RegExp(comicName, "i"));
-            // var result = response.results[i].image.original_url;
-
-// function splitString(stringToSplit, separator) {
-//   var arrayOfStrings = stringToSplit.split(separator);
-
-//   console.log('The original string is: "' + stringToSplit + '"');
-//   console.log('The separator is: "' + separator + '"');
-//   console.log('The array has ' + arrayOfStrings.length + ' elements: ' + arrayOfStrings.join(' / '));
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//     modal.style.display = "none";
 // }
 
-// var tempestString = 'Oh brave new world that has such people in it.';
-// var monthString = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec';
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
 
-// var space = ' ';
-// var comma = ',';
+//ALTERNATIVE ALIAS CODE
+// console.log(lcComicName);
+            // var characterAlias = response.results[i].aliases;    
 
-// splitString(tempestString, space);
-// splitString(tempestString);
-// splitString(monthString, comma);            
+            // var lcCharacterAlias = characterAlias.toLowerCase();
 
-  
+            // var enter = '\n';
 
-
-
-
-// splitString(aliasString, enter);
-// splitString(tempestString);
-// splitString(monthString, comma);            
-
+            // var arrayOfAlias = lcCharacterAlias.split(enter);
+            
+            // var index = arrayOfAlias.indexOf(comicName);
