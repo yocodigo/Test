@@ -1,0 +1,29 @@
+.col-xs-3 {
+	float: left;
+}
+
+#modal {
+	display: none;
+	/*padding: 30px;
+	margin-top: 100px;
+	margin-left: 25px;
+	height: 280px;
+	max-width: 480px;
+	background: #0066ff;
+	color: #fff;
+	opacity: 0.8;
+	border: 1px solid #0066ff;*/
+}
+
+#close {
+	padding: 2px;
+	position: absolute;
+	top: 5px;
+	right: 4px;
+	height: 20px;
+	background: gray;
+	color: #fff;
+	cursor: pointer;
+}
+
+

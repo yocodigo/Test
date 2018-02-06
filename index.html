@@ -1,73 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Superhero History Database</title>
-  <!-- Title Icon -->
-  <!-- <link rel="shortcut icon" href="assets/images/captainamericashield.png"> -->
-
-  <!-- Bootstrap CSS -->
+  <title>Comic Book Character History Database</title>
+  <!-- Bootstrap -->
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-  <!-- CSS -->
-  <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
-
   <!-- JQuery JS Library -->
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-
   <!-- Bootstrap JS Library -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
   <!-- Crytpo & Google JS Library for Marvel API -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/aes-min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+  <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script> -->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha256.js"></script> -->
+ <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
-  <h1>Hello</h1>
   <nav class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         </button>
         <a class="navbar-brand" href="index.html">Marvel Character History Database</a>
       </div>
-  
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav navbar-left">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phase 1 <span class="caret"></span></a>
-                <ul class="dropdown-menu" id = "pOne">
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phase 2 <span class="caret"></span></a>
-                <ul class="dropdown-menu" id = "pTwo">
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phase 3 <span class="caret"></span></a>
-                <ul class="dropdown-menu" id = "pThree">
-                </ul>
-              </li>
-          </ul>
-      </div><!-- /.navbar-collapse -->
     </div>
   </nav>
 
   <div id ="fullsiteContainer" class="container-fluid">
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
       <div id="carousel-id" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-id" data-slide-to="0" class="active" data-interval ="1000"></li>
-          <li data-target="#carousel-id" data-slide-to="1" class="" data-interval ="1000"></li>
-          <li data-target="#carousel-id" data-slide-to="2" class="" data-interval ="1000"></li>
-        </ol>
         <div class="carousel-inner">
           <div class="item active">
-            <!-- <img class = "headline" src="assets/images/civilwar.jpg" data-imdb = "tt3498820" data-character ="Captain America"> -->
             <div class="container">
               <div class="carousel-caption">
                 <h1 class ="headline" data-imdb = "tt3498820" data-character ="Captain America">Captain America: Civil War</h1>
@@ -75,7 +39,6 @@
             </div>
           </div>
           <div class="item">
-            <!-- <img class="headline" src="assets/images/ageofapocalypse.png" data-imdb ="tt3385516" data-character = "Apocalypse"> -->
             <div class="container">
               <div class="carousel-caption">
                 <h1 class ="headline" data-imdb ="tt3385516" data-character = "Apocalypse">X-Men: Apocalypse</h1>
@@ -83,7 +46,6 @@
             </div>
           </div>
           <div class="item">
-            <!-- <img src="assets/images/daredevil.jpg" class = "headline" data-imdb = "tt3322312" data-character ="Daredevil"> -->
             <div class="container">
               <div class="carousel-caption">
                 <h1 class ="headline" data-imdb = "tt3498820" data-character ="Captain America">Daredevil</h1>
@@ -95,7 +57,7 @@
         <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
     </div>
-    <!-- search boxes -->
+
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -114,19 +76,45 @@
         </div>
         <div class="panel-body">
           <input type="text" name="" id="comicSearch" class="form-control">
-          <br />
-          <button type="button" class="btn btn-primary" id ="characterSubmit">Search</button>
+          <br/>
+          <button type="button" class="btn btn-primary btn-info btn-lg" id ="characterSubmit">Search</button>
         </div>
       </div>
     </div>
-    <!-- Lower Section -->
-    <div class ="container-fluid" id ="infoView">
-      <!-- Movies View Section -->
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" id ="moviesView">        
+
+    <!-- THE MODAL -->
+   <!--  <div id="modal">
+      <div id="close">X</div>
+      <h1>Please only choose Marvel character names</h1>
+    </div> -->
+
+    <!-- BOOTSTRAP MODAL -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
       </div>
-      <!-- Comics Book View Section -->
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" id = "comicsView">
+      <div class="modal-body">
+        <p>Please Enter a Valid Marvel Character&hellip;</p>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div><
+
+    <div class ="textContainer" id ="infoView">
+      <div class="name" id ="moviesView">        
+      </div>
+      <div class="realName" id ="moviesView">        
+      </div>
+      <div class="birth"></div>
+      <div class="description" id = "comicsView">
+      </div>
+      <div class="image"><img src=""></img></div>
     </div>
   </div>
 
@@ -139,6 +127,6 @@
   </div>
 
 <!-- Javascript -->
-<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="app3.js"></script>
 </body>
 </html>
