@@ -1,6 +1,10 @@
   $(document).ready(function() {
     console.log("document loaded");
-});
+
+function modal() {
+    $('#myModal').modal('show');
+}
+
 
 $(".btn").on("click", function() {
     //Prevents the document from reloading
@@ -20,14 +24,14 @@ $(".btn").on("click", function() {
     //Boolean variable for publisher matching
     var isMarvel = false;
 
+
     //AJAX API call to ComicVine    
     $.ajax({
       url: proxy + queryURL,
       method: 'GET'
     }).done(function(response) {
       // console.log(response.results);
-      debugger;
-        function returnIndex() {
+
             for (var i = 0; i < response.results.length; i++) {
                 // debugger;
                 var character = response.results[i];
@@ -54,42 +58,41 @@ $(".btn").on("click", function() {
                     charFound = true;
                 }
             }
-        }
+        
 
         if (charFound) {
-            checkPublisher();
-        }
-
-        function checkPublisher() {
-            if (publisherName === "Marvel") {
+             if (publisherName === "Marvel") {
                 isMarvel = true;
             }
-            else {
-               debugger;
+             else {
                modal();
             }
-        }    
-
-        if (isMarvel) {
-            displayCharacter();
+            
         }
 
-        //Display character information
-        function displayCharacter() {
+        if (isMarvel) {
             $(".name").text(characterName);
             $(".realName").text(character.real_name);
             $(".birth").text(character.birth);
             $(".description").text(character.deck);
             $("img").attr("src", character.image.medium_url);
+            $("")
         }
 
+        //Display character information
+        // function displayCharacter() {
+        //     $(".name").text(characterName);
+        //     $(".realName").text(character.real_name);
+        //     $(".birth").text(character.birth);
+        //     $(".description").text(character.deck);
+        //     $("img").attr("src", character.image.medium_url);
+        // }
+
         //Display modal
-        function modal() {
-           $('#myModal').modal('show');
-        } 
+        
     });
 });
-
+});
 //ALTERNATIVE MODAL CODE
 // Get the modal
 // var modal = document.getElementById('myModal');
