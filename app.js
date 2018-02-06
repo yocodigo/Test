@@ -11,7 +11,7 @@ console.log("document loaded");
 
         //Global variables
         var apiKey = "feec332cd3344e9226a7105dd29cc5dae84c154d";
-        var comicName = $("#comicSearch").val().trim();
+        var comicName = $("#characterInput").val().trim();
         var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=10&format=json";
         
         // var queryURL = "https://comicvine.gamespot.com/api/series_list/?api_key=" + apiKey + "&format=json";
