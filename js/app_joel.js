@@ -5,14 +5,17 @@ console.log("document loaded");
         $('#myModal').modal('show');
     }
 
-    $(".btn").on("click", function() {
+    $("#inputButton").on("click", function() {
         //Prevents the document from reloading
         event.preventDefault();
 
         //Global variables
         var apiKey = "feec332cd3344e9226a7105dd29cc5dae84c154d";
-        var comicName = $("#comicSearch").val().trim();
-        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=10&format=json";
+        var comicName = $("#characterInput").val().trim();
+
+        $("#characterInput").text("");
+
+        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=100&format=json";
         
         // var queryURL = "https://comicvine.gamespot.com/api/series_list/?api_key=" + apiKey + "&format=json";
         var proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -33,22 +36,27 @@ console.log("document loaded");
             for (var i = 0; i < response.results.length; i++) {
                 // debugger;
                 var character = response.results[i];
-                
+                // console.log(character);
                 //Targets character key
                 var characterName = character.name; 
                 
                 //Targets publisher key
                 var characterPublisher = character.publisher;
                 
+                var characterImage = character.image.original_url;
+                // console.log(characterImage);
+                
                 //Targets publisher name key
                 var publisherName = characterPublisher.name;   
                 
                 //Lower cases the returned string 
                 var lcCharacterName = characterName.toLowerCase();
+                // console.log(lcCharacterName);
                 
                 //Lower cases the user input string
                 var lcComicName = comicName.toLowerCase();
-
+                console.log(lcComicName);
+                
                 //Assigns the response id value to originId
                 var originId = response.results[i].id;
 
@@ -66,43 +74,21 @@ console.log("document loaded");
                    modal();
                 }
             }
-
+            console.log(characterImage);
             if (isMarvel) {
-                $(".name").text(characterName);
-                $(".realName").text(character.real_name);
-                $(".birth").text(character.birth);
-                $(".description").html(character.description);
-                $("img").attr("src", character.image.medium_url);
+                $("#characterName").text("Character Name: " + characterName);
+                //Add name to slide 1
+                $("#marvel1").text(characterName);
+                $("#realName").text("Real Name: " + character.real_name);
+                $("#birthDate").text("Birth Date: " + character.birth);
+                // $("#description").html("<div>" + character.description + "</div>");
+                $("#character_bio").append("<div>" + character.description + "</div>");
+                // $(".slide1").css("background-image", "url(characterImage)");
+                $(".slide1").html("<img src=" + characterImage + " height=" + 500 + " width=" + 806.25 + "></img>");
             }
         });
     });
 });
-//ALTERNATIVE MODAL CODE
-// Get the modal
-// var modal = document.getElementById('myModal');
-
-// // Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
-
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// // When the user clicks the button, open the modal 
-// btn.onclick = function() {
-//     modal.style.display = "block";
-// }
-
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//     modal.style.display = "none";
-// }
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
 
 //ALTERNATIVE ALIAS CODE
 // console.log(lcComicName);
