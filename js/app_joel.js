@@ -10,12 +10,12 @@ console.log("document loaded");
         event.preventDefault();
 
         //Global variables
-        var apiKey = "feec332cd3344e9226a7105dd29cc5dae84c154d";
+        var mykey = config.MY_KEY;
         var comicName = $("#characterInput").val().trim();
 
         $("#characterInput").text("");
 
-        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=100&format=json";
+        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + mykey + "&filter=name:" + comicName + "&limit=100&format=json";
         
         // var queryURL = "https://comicvine.gamespot.com/api/series_list/?api_key=" + apiKey + "&format=json";
         var proxy = 'https://cors-anywhere.herokuapp.com/';
