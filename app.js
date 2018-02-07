@@ -5,14 +5,17 @@ console.log("document loaded");
         $('#myModal').modal('show');
     }
 
-    $("#characterInput").on("click", function() {
+    $("#inputButton").on("click", function() {
         //Prevents the document from reloading
         event.preventDefault();
 
         //Global variables
         var apiKey = "feec332cd3344e9226a7105dd29cc5dae84c154d";
         var comicName = $("#characterInput").val().trim();
-        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=10&format=json";
+
+        $("#characterInput").text("");
+
+        var queryURL = "https://comicvine.gamespot.com/api/characters/?api_key=" + apiKey + "&filter=name:" + comicName + "&limit=100&format=json";
         
         // var queryURL = "https://comicvine.gamespot.com/api/series_list/?api_key=" + apiKey + "&format=json";
         var proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -33,7 +36,7 @@ console.log("document loaded");
             for (var i = 0; i < response.results.length; i++) {
                 // debugger;
                 var character = response.results[i];
-                
+                // console.log(character);
                 //Targets character key
                 var characterName = character.name; 
                 
@@ -45,10 +48,10 @@ console.log("document loaded");
                 
                 //Lower cases the returned string 
                 var lcCharacterName = characterName.toLowerCase();
-                
+                // console.log(lcCharacterName);
                 //Lower cases the user input string
                 var lcComicName = comicName.toLowerCase();
-
+                console.log(lcComicName);
                 //Assigns the response id value to originId
                 var originId = response.results[i].id;
 
@@ -71,7 +74,7 @@ console.log("document loaded");
                 $("#characterName").text(characterName);
                 $("#realName").text(character.real_name);
                 $("#birthDate").text(character.birth);
-                $("#description").html(character.description);
+                // $("#description").html(character.description);
                 // $(".slide").html("src", character.image.medium_url);
             }
         });

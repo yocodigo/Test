@@ -171,3 +171,18 @@ img.rotated:hover {
 img.skewed:hover {
    -webkit-transform : skew(320deg, 0deg);
 }
+
+.modal-header {
+  background-image: url(../images/hulkeyes2.jpg);
+  height: 300px;
+}
+
+#modalComment {
+  float: left;
+  width: 400px;
+  text-align: left;
+}
+
+.modal-footer {
+  background-color: #80AF34;
+}
