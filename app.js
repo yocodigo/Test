@@ -43,6 +43,8 @@ console.log("document loaded");
                 //Targets publisher key
                 var characterPublisher = character.publisher;
                 
+                var characterImage = character.image.original_url;
+                // console.log(characterImage);
                 //Targets publisher name key
                 var publisherName = characterPublisher.name;   
                 
@@ -69,13 +71,17 @@ console.log("document loaded");
                    modal();
                 }
             }
-
+            console.log(characterImage);
             if (isMarvel) {
-                $("#characterName").text(characterName);
-                $("#realName").text(character.real_name);
-                $("#birthDate").text(character.birth);
-                // $("#description").html(character.description);
-                // $(".slide").html("src", character.image.medium_url);
+                $("#characterName").text("Character Name: " + characterName);
+                //Add name to slide 1
+                $("#marvel1").text(characterName);
+                $("#realName").text("Real Name: " + character.real_name);
+                $("#birthDate").text("Birth Date: " + character.birth);
+                // $("#description").html("<div>" + character.description + "</div>");
+                $("#character_bio").append("<div>" + character.description + "</div>");
+                // $(".slide1").css("background-image", "url(characterImage)");
+                $(".slide1").html("<img src=" + characterImage + " height=" + 500 + " width=" + 806.25 + "></img>");
             }
         });
     });
